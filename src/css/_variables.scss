@@ -1,0 +1,20 @@
+/*VARIABLES*/
+
+/*FONT-IMPORT*/
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap');
+
+/*COLORS*/
+$primary-background: radial-gradient(circle, rgba(63,148,191,1) 0%, rgba(63,94,251,1) 100%);
+$white: white;
+$manila: #f1d592;
+$manila-light: lighten(#f1d592, 10%);
+
+/*FONTS*/
+$carter: 'Carter One', sans-serif;
+$primary-font: 'Zilla Slab', serif;
+$secondary-font: 'Work Sans', sans-serif;
+
+/*ETC.*/
+$white-border: 1px solid white;

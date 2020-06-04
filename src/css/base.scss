@@ -1,7 +1,102 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-;
+@import "_variables.scss";
+@import "_mixins.scss";
 
 body {
   background: $primary-background;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+#header {
+  @include noWrapFlex;
+  align-items: center;
+}
+
+#dodo-logo {
+  width: 200px;
+  height: auto;
+}
+
+h1 {
+  font-family: $carter;
+  color: $white;
+  font-size: 45px;
+}
+
+#main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.header-widget {
+ border: 5px solid white;
+ border-radius: 20px;
+ width: max-content;
+ padding: 5px;
+ margin: 5px;
+ justify-self: right;
+ font-family: $secondary-font;
+ padding: -20px 15px;
+
+ p {
+   color: white;
+   text-align: center;
+   font-size: 25px;
+ }
+
+ h3 {
+   color: white;
+ }
+}
+
+.login-widget {
+  @include mainWidget;
+  @include formFlex;
+
+  fieldset {
+    @include dodoform;
+    align-self: center;
+  }
+}
+
+.login {
+  display: flex;
+  flex-flow: column;
+}
+
+.main-widget {
+  @include mainWidget;
+}
+
+h2 {
+  font-family: $carter;
+}
+
+h3, legend, button {
+  font-family: $primary-font;
+}
+
+p, input {
+  font-family: $secondary-font;
+}
+
+#book-trip,
+#find-traveler {
+  @include formFlex;
+}
+
+.booking-form,
+.find-traveler {
+ @include dodoform;
+ padding: 20px;
+}
+
+#pending-trips,
+#trips {
+  h2 {
+    text-align: center;
+    font-size: 30px;
+  }
 }

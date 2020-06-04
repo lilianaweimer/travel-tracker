@@ -5,34 +5,63 @@
   </head>
   <body>
     <section id="header">
-      <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo">
+      <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo" id="dodo-logo">
       <h1 class="welcome">Welcome to Dodo Airlines!</h1>
-      <article class="header-widget agent">Current Happy Travelers: x</article>
-      <article class="header-widget traveler">Amount Spent on Traveling This Year: $x</article>
-      <article class="header-widget agent">Amount Earned This Year: $x</article>
+      <article class="header-widget agent">
+        <h3>Current Happy Travelers</h3>
+        <p>x</p>
+      </article>
+      <article class="header-widget traveler">
+        <h3>Amount Spent on Travel This Year</h3>
+        <p>$$$</p>
+      </article>
+      <article class="header-widget agent">
+        <h3>Amount Earned This Year</h3>
+        <p>$$$</p>
+      </article>
     </section>
     <section id="main">
-      <article class="login">
+      <article class="login-widget">
         <fieldset class="login">
           <legend>Login</legend>
           <form class="login">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button name="login">Login</button>
+            <input type="text" name="username" placeholder="username" label="username" required="required">
+            <input type="password" name="password" placeholder="password" label="password" required="required">
+            <button name="login" label="login button">Login</button>
           </form>
         </fieldset>
       </article>
       <article class="traveler main-widget" id="trips">
-        <h3>Your Trips</h3>
+        <h2>Your Trips</h2>
       </article>
       <article class="traveler main-widget" id="book-trip">
-        <h3>Book a Trip</h3>
+        <fieldset class="booking-form">
+          <legend>Book a Trip</legend>
+          <form class="booking-form">
+            <label for="start">Start Date</label>
+            <input type="date" label="start date" name="start">
+            <label for="duration">Duration</label>
+            <input type="number" label="duration in days" name="duration" min="1" max="20">
+            <label for="number">Number of Travelers</label>
+            <input type="number" label="number of travelers" name="number" min="1" max="5">
+            <label for="destination">Destination</label>
+            <select label="destination" name="destination">
+            </select>
+            <button name="book trip" label="book trip button">Book Trip</button>
+          </form>
+        </fieldset>
       </article>
       <article class="agent main-widget" id="pending-trips">
-        <h3>Pending Trip Requests</h3>
+        <h2>Pending Trip Requests</h2>
       </article>
       <article class="agent main-widget" id="find-traveler">
-        <h3>Find a Traveler</h3>
+        <fieldset class="find-traveler">
+          <legend>Find a Client</legend>
+          <form class="login">
+            <input type="search" name="user search" placeholder="client's name" label="user search">
+            <button name="search" label="client search button">Search</button>
+          </form>
+        </fieldset>
       </article>
     </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

@@ -1,0 +1,51 @@
+/*MIXINS*/
+
+/*GRID & FLEX*/
+
+@mixin noWrapFlex() {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+@mixin mainWidget() {
+    border: 10px solid $manila;
+    border-radius: 20px;
+    background-color: $manila-light;
+    width: 600px;
+    height: 600px;
+    margin: 20px;
+}
+
+@mixin dodoform() {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 10px solid $manila;
+    width: 450px;
+    height: auto;
+    legend {
+        font-size: 30px;
+    }
+    label {
+        font-size: 20px;
+    }
+    input, select {
+        font-size: 20px;
+        height: 30px;
+        margin: 10px;
+    }
+    button {
+        height: 35px;
+        font-size: 20px;
+        margin: 10px;
+        background-color: $manila-light;
+        border: 4px outset $manila;
+    }
+}
+
+@mixin formFlex() {
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
