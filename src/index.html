@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <title>Dodo Airlines Travel Tracker</title>
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
-
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
+    <section id="header">
+      <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo">
+      <h1 class="welcome">Welcome to Dodo Airlines!</h1>
+      <article class="header-widget agent">Current Happy Travelers: x</article>
+      <article class="header-widget traveler">Amount Spent on Traveling This Year: $x</article>
+      <article class="header-widget agent">Amount Earned This Year: $x</article>
+    </section>
+    <section id="main">
+      <article class="login">
+        <fieldset class="login">
+          <legend>Login</legend>
+          <form class="login">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <button name="login">Login</button>
+          </form>
+        </fieldset>
+      </article>
+      <article class="traveler main-widget" id="trips">
+        <h3>Your Trips</h3>
+      </article>
+      <article class="traveler main-widget" id="book-trip">
+        <h3>Book a Trip</h3>
+      </article>
+      <article class="agent main-widget" id="pending-trips">
+        <h3>Pending Trip Requests</h3>
+      </article>
+      <article class="agent main-widget" id="find-traveler">
+        <h3>Find a Traveler</h3>
+      </article>
+    </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
