@@ -1,6 +1,5 @@
 class User {
-    constructor(id = 'agency') {
-        this.id = id;
+    constructor() {
         this.password = 'travel2020';
         this.loggedIn = false;
     }

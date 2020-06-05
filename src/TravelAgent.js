@@ -1,8 +1,8 @@
 const User = require('./User');
 
 class TravelAgent extends User {
-    constructor(agentData) {
-        super(agentData);
+    constructor() {
+        super();
         this.id = 'agency';
         this.username = 'agency';
         this.allTrips = [];

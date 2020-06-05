@@ -10,7 +10,6 @@ describe('Travel Agent', function() {
     let travelAgent;
     let today = '2020/06/04';
     let agentData = {};
-    let id = 45;
     let userData = {
         "id": 45,
         "name": "Ofilia Titman",
@@ -113,9 +112,9 @@ describe('Travel Agent', function() {
     ];
 
     beforeEach(() => {
-    user = new User(userData);
-    traveler = new Traveler(id, userData);
-    travelAgent = new TravelAgent(agentData);
+    user = new User();
+    traveler = new Traveler(userData);
+    travelAgent = new TravelAgent();
     });
 
     it('should be a function', function() {

@@ -1,8 +1,9 @@
 const User = require('./User');
 
 class Traveler extends User {
-    constructor(id, userData) {
-        super(id);
+    constructor(userData) {
+        super();
+        this.id = userData.id;
         this.username = undefined;
         this.trips = [];
         this.name = userData.name;

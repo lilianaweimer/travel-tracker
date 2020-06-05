@@ -11,7 +11,6 @@ describe('Traveler', function() {
         "name": "Ofilia Titman",
         "travelerType": "thrill-seeker"
     };
-    let id = 45;
     let trips = [
         {
             "id": 45,
@@ -73,8 +72,8 @@ describe('Traveler', function() {
     ];
 
     beforeEach(() => {
-    user = new User(id);
-    traveler = new Traveler(id, userData);
+    user = new User();
+    traveler = new Traveler(userData);
     
     });
 
@@ -91,7 +90,7 @@ describe('Traveler', function() {
    });
    
     it('should have an id', function() {
-        expect(traveler.id).to.equal(userData.id);
+        expect(traveler.id).to.equal(45);
     });
 
     it('should have a password', function() {
