@@ -39,13 +39,13 @@
           <legend>Book a Trip</legend>
           <form class="booking-form">
             <label for="start">Start Date</label>
-            <input type="date" label="start date" name="start">
+            <input type="date" label="start date" name="start" required="required">
             <label for="duration">Duration</label>
-            <input type="number" label="duration in days" name="duration" min="1" max="20">
+            <input type="number" label="duration in days" name="duration" min="1" max="20" required="required">
             <label for="number">Number of Travelers</label>
-            <input type="number" label="number of travelers" name="number" min="1" max="5">
+            <input type="number" label="number of travelers" name="number" min="1" max="5" required="required">
             <label for="destination">Destination</label>
-            <select label="destination" name="destination">
+            <select label="destination" name="destination" required="required">
             </select>
             <button name="book trip" label="book trip button">Book Trip</button>
           </form>
@@ -58,7 +58,7 @@
         <fieldset class="find-traveler">
           <legend>Find a Client</legend>
           <form class="login">
-            <input type="search" name="user search" placeholder="client's name" label="user search">
+            <input type="search" name="user search" placeholder="client's name" label="user search" required="required">
             <button name="search" label="client search button">Search</button>
           </form>
         </fieldset>
