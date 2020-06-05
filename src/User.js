@@ -1,6 +1,6 @@
 class User {
-    constructor(userData) {
-        this.id = userData.id || 'agency';
+    constructor(id = 'agency') {
+        this.id = id;
         this.password = 'travel2020';
         this.loggedIn = false;
     }

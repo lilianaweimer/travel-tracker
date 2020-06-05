@@ -9,10 +9,9 @@ describe('User', function() {
         "name": "Ofilia Titman",
         "travelerType": "thrill-seeker"
     };
-    let agentData = {};
 
     beforeEach(() => {
-    user = new User(userData);
+    user = new User(userData.id);
     });
 
     it('should be a function', function() {
@@ -28,7 +27,7 @@ describe('User', function() {
     });
 
     it('should be able to be a travel agent', function() {
-        user = new User(agentData);
+        user = new User();
         expect(user.id).to.equal('agency');
     })
 
