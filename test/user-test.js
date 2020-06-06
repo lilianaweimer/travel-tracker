@@ -43,4 +43,18 @@ describe('User', function() {
         user.logIn('password');
         expect(user.loggedIn).to.equal(false);
     });
+
+    it('should have a type', function() {
+        expect(user.type).to.equal(undefined);
+    });
+
+    it('should be able to change type to traveler', function() {
+       user.changeType('traveler');
+       expect(user.type).to.equal('traveler'); 
+    });
+
+    it('should be able to change type to a travel agent', function() {
+        user.changeType('agent');
+        expect(user.type).to.equal('agent');
+    })
 });

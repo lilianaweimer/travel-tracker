@@ -13,7 +13,7 @@ import './css/base.scss';
 import './images/turing-logo.png'
 
 
-let user;
+let user = new User();
 let travelAgent;
 let traveler;
 let users;
@@ -65,22 +65,21 @@ const retrieveUserID = (username) => {
 
 const createUser = (newID) => {
     if (newID === 'agency') {
-        user = new User(newID);
         travelAgent = new TravelAgent(newID);
+        user.changeType('agent');
         return travelAgent;
     } else {
         let userInfo = finduserByID(newID);
-        user = new User(userInfo);
-        traveler = new Traveler(newID, userInfo);
+        traveler = new Traveler(userInfo);
+        user.changeType('traveler');
         return traveler;
     }
 }
 
 const checkLogInStatus = () => {
     console.log('checking log in status...');
-    
     if (user.loggedIn === true) {
-        domUpdates.showDashboard();
+        domUpdates.showDashboard(user);
     }
 }
 
