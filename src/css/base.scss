@@ -109,3 +109,36 @@ p, input {
 #dodo-logo {
   padding-right: 15px;
 }
+
+.trip {
+  height: auto;
+  width: 250px;
+  border: 5px solid $manila;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 5px;
+  text-align: center;
+    h4 {
+      font-family: $primary-font;
+      font-size: 20px;
+    }
+}
+
+.trip-image {
+  width: 250px;
+  height: auto;
+  border: 2px solid $manila;
+  border-radius: 20px;
+}
+
+#trips {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 625px;
+    .trips-header {
+      align-self: flex-start;
+      padding-right: 100px;
+      padding-left: 210px;
+    }
+}

@@ -75,8 +75,6 @@ const createUser = (newID) => {
         traveler = new Traveler(userInfo);
         user.changeType('traveler');
         domUpdates.createDomUser(traveler);
-        console.log('traveler', traveler);
-        
         return traveler;
     }
 }

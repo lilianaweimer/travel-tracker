@@ -22,7 +22,7 @@ const domUpdates = {
 
     showDashboard(user) {
         if (user.type === 'traveler') {
-            this.showTravelerDashboard(user);
+            this.showTravelerDashboard();
         } else if (user.type === 'agent') {
             this.showAgentDashboard();
         }
@@ -32,6 +32,7 @@ const domUpdates = {
         this.showTravelerWidgets();
         this.showTravelerTrips(this.trips);
         this.showTravelerExpenses(this.destinations);
+        this.displayWelcome(traveler);
     },
 
     showTravelerWidgets() {
@@ -52,8 +53,44 @@ const domUpdates = {
     },
 
     showTravelerTrips(destinations) {
-        traveler.addTrips(destinations);
+        traveler.addTrips(destinations);  
+        let sortedTrips = traveler.trips.map(trip => {
+            trip.date = new Date(trip.date);
+            return trip;
+        }).sort((a, b) => {
+            return b.date - a.date;
+        });        
+        sortedTrips.forEach(trip => {
+            this.displayTrip(trip);
+        });
+    },
 
+    displayTrip(trip) {
+        let tripWidget = document.getElementById('trips');
+        console.log(trip);
+        
+        let destination = this.destinations.find(destination => {
+            return trip.destinationID === destination.id;
+        });
+        let cleanDate = `${trip.date.getMonth()}/${trip.date.getDate()}/${trip.date.getFullYear()}`
+        let tripInfo = `
+            <article class='trip'>
+                <h4>${destination.destination}</h4>
+                <img src='${destination.image}' alt='${destination.alt}' class="trip-image"/>
+                <p>${cleanDate}</p>
+                <p>${trip.duration} days</p>
+                <p>${trip.travelers} happy travelers</p>
+                <p>Status: ${trip.status}</p>
+            </article>`;
+        tripWidget.insertAdjacentHTML('beforeend', tripInfo);
+    },
+
+    displayWelcome(user) {
+        let welcome = document.querySelector('.welcome');
+        if (user === traveler) {
+            let firstName = traveler.name.split(" ")[0]
+            welcome.innerText = `Welcome, ${firstName}!`
+        }
     },
 
 }
