@@ -22,7 +22,8 @@ class Traveler extends User {
     }
 
     calculateAnnualTravelExpenses(destinations) {
-        let initialCost = this.trips.reduce((totalExpenses, trip) => {
+        let trips = this.trips.filter(trip => trip.date.getFullYear() === 2020);
+        let initialCost = trips.reduce((totalExpenses, trip) => {
             let tripExpense;
             for (const destination of destinations) {
                 if (destination.id === trip.destinationID) {

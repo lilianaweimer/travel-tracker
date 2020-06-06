@@ -22,7 +22,8 @@ class TravelAgent extends User {
     }
 
     calculateIncome(destinations) {
-        let initialCost = this.allTrips.reduce((totalExpenses, trip) => {
+        let trips = this.allTrips.filter(trip => trip.date.includes('2020'));
+        let initialCost = trips.reduce((totalExpenses, trip) => {
             let tripExpense;
             for (const destination of destinations) {
                 if (destination.id === trip.destinationID) {
@@ -40,6 +41,8 @@ class TravelAgent extends User {
     findTodaysTravelers(trips, today) {
         let todaysTravelers = [];
         trips.forEach(trip => {
+            console.log(trip.date);
+            
             if (!todaysTravelers.includes(trip.userID) && trip.date === today) {
                 todaysTravelers.push(trip.userID);
             }

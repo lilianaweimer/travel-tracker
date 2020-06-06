@@ -67,6 +67,7 @@ const retrieveUserID = (username) => {
 const createUser = (newID) => {
     if (newID === 'agency') {
         travelAgent = new TravelAgent(newID);
+        travelAgent.addTrips(trips);
         user.changeType('agent');
         domUpdates.createDomUser(travelAgent);
         return travelAgent;

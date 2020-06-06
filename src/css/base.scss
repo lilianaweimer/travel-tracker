@@ -131,14 +131,15 @@ p, input {
   border-radius: 20px;
 }
 
-#trips {
+#trips,
+#pending-trips {
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
   height: 625px;
     .trips-header {
       align-self: flex-start;
-      padding-right: 100px;
-      padding-left: 210px;
+      padding-right: 200px;
+      padding-left: 20px;
     }
 }
