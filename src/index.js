@@ -36,10 +36,11 @@ Promise.all([
     .then(data => createDatasets(data[0], data[1], data[2]))
     .catch(err => console.error(err))
 
-const createDatasets = (userData, destinationData, tripsData) => {
+const createDatasets = (userData, tripsData, destinationData) => {
     users = userData.travelers;    
-    destinations = destinationData.destinations;    
-    trips = tripsData.trips;    
+    trips = tripsData.trips;
+    destinations = destinationData.destinations;   
+    domUpdates.importApiData(users, trips, destinations);    
 }
 
 const attemptLogin = () => {
@@ -67,17 +68,20 @@ const createUser = (newID) => {
     if (newID === 'agency') {
         travelAgent = new TravelAgent(newID);
         user.changeType('agent');
+        domUpdates.createDomUser(travelAgent);
         return travelAgent;
     } else {
         let userInfo = finduserByID(newID);
         traveler = new Traveler(userInfo);
         user.changeType('traveler');
+        domUpdates.createDomUser(traveler);
+        console.log('traveler', traveler);
+        
         return traveler;
     }
 }
 
 const checkLogInStatus = () => {
-    console.log('checking log in status...');
     if (user.loggedIn === true) {
         domUpdates.showDashboard(user);
     }
