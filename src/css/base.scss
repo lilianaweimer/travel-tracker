@@ -90,8 +90,8 @@ p, input {
 
 .booking-form,
 .find-traveler {
- @include dodoform;
- padding: 20px;
+  @include dodoform;
+  padding: 20px;
 }
 
 #pending-trips,
@@ -113,7 +113,7 @@ p, input {
 .trip {
   height: auto;
   width: 250px;
-  border: 5px solid $manila;
+  border: 5px double $manila;
   border-radius: 20px;
   margin: 10px;
   padding: 5px;
@@ -121,12 +121,18 @@ p, input {
     h4 {
       font-family: $primary-font;
       font-size: 20px;
+      font-weight: bold;
+    }
+    button {
+      background-color: $manila-light;
+      border: 4px outset $manila;
     }
 }
 
 .trip-image {
-  width: 250px;
-  height: auto;
+  width: 245px;
+  height: 150px;
+  overflow: hidden;
   border: 2px solid $manila;
   border-radius: 20px;
 }

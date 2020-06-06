@@ -7,17 +7,11 @@ const domUpdates = {
     destinations: null,
     today: null,
 
-    getTodaysDate() {
-        let today = new Date();
-        today = `${today.getMonth()}/${today.getDate()}/${today.getFullYear()}`
-        this.today = today;
-    },
-
-    importApiData(users, trips, destinations) {
+    importData(users, trips, destinations, date) {
         this.users = users;
         this.trips = trips;
         this.destinations = destinations;
-        this.getTodaysDate();
+        this.date = date;
     },
 
     createDomUser(user) {
@@ -28,27 +22,25 @@ const domUpdates = {
         }
     },
 
-    showDashboard(user) {
-        if (user.type === 'traveler') {
-            this.showTravelerDashboard();
-        } else if (user.type === 'agent') {
-            this.showAgentDashboard();
-        }
-    },
-
-    showTravelerDashboard() {
-        this.showTravelerWidgets();
-        this.showTravelerTrips(this.trips);
-        this.showTravelerExpenses(this.destinations);
-        this.displayWelcome('traveler');
-    },
-
-    showAgentDashboard() {
-        this.showAgentWidgets();
-        this.showAgentIncome(this.destinations);
-        this.showCurrentTravelers(this.trips);
-        this.showPendingTrips(this.trips);
-        this.displayWelcome('agent');
+    updateDestinationsDropdown() {
+        let dropdown = document.querySelector('.dropdown');
+        let sortedDestinations = this.destinations.sort((a, b) => {
+            let destinationA = a.destination.toLowerCase();
+            let destinationB = b.destination.toLowerCase();
+            if (destinationA < destinationB) {
+                return -1
+            }
+            if (destinationA > destinationB) {
+                return 1
+            }
+            return 0;
+        });
+        sortedDestinations.forEach(destination => {
+            let destinationOption = `
+            <option value='${destination.destination}' id='${destination.id}'>${destination.destination}</option>
+            `;
+            dropdown.insertAdjacentHTML('beforeend', destinationOption);
+        });
     },
 
     showTravelerWidgets() {
@@ -70,6 +62,7 @@ const domUpdates = {
 
     showTravelerTrips(destinations) {
         traveler.addTrips(destinations);
+        this.removeTrips();
         let sortedTrips = this.sortTripsByDate(traveler.trips);
         let tripWidget = document.getElementById('trips');
         sortedTrips.forEach(trip => {
@@ -81,17 +74,13 @@ const domUpdates = {
                 <article class='trip'>
                     <h4>${destination.destination}</h4>
                     <img src='${destination.image}' alt='${destination.alt}' class="trip-image"/>
-                    <p>${cleanDate}</p>
-                    <p>${trip.duration} days</p>
-                    <p>${trip.travelers} happy travelers</p>
+                    <p>Departure: ${cleanDate}</p>
+                    <p>Days: ${trip.duration}</p>
+                    <p>Travelers: ${trip.travelers}</p>
                     <p>Status: ${trip.status}</p>
                 </article>`;   
             this.displayTrip(tripWidget, tripInfo);
         });
-    },
-
-    displayTrip(tripWidget, tripInfo) {
-        tripWidget.insertAdjacentHTML('beforeend', tripInfo);
     },
 
     showAgentWidgets() {
@@ -123,13 +112,20 @@ const domUpdates = {
                 <p>${cleanDate}</p>
                 <p>Client Name: ${this.findUserName(trip.userID)}</p> 
                 <p>Duration: ${trip.duration} days</p>
-                <p>Happy Travelers: ${trip.travelers}</p>
+                <p>Walkers: ${trip.travelers}</p>
                 <p>Status: ${trip.status}</p>
                 <button class='approve-trip'>Approve</button>
                 <button class='delete-trip'>Delete</button>
             </article>`;
             this.displayTrip(displayTo, tripHTML);
         });
+    },
+
+    removeTrips() {
+        let tripCards = document.getElementsByClassName('trip');
+        while (tripCards[0]) {
+            tripCards[0].parentNode.removeChild(tripCards[0]);
+        }
     },
 
     findUserName(id) {
@@ -164,6 +160,28 @@ const domUpdates = {
         }).sort((a, b) => {
             return b.date - a.date;
         });       
+    },
+
+    displayTrip(tripWidget, tripInfo) {
+        tripWidget.insertAdjacentHTML('beforeend', tripInfo);
+    },
+
+    displayEstimatedCost(cost) {
+        let button = document.querySelector('.cost-button');
+        let newHTML = `
+        <div>
+        <h4>Estimated Cost (10% fee included): $${cost}</h4>
+        `;
+        document.querySelector('.book-button').classList.remove('hidden');
+        button.classList.add('hidden');
+        button.insertAdjacentHTML('beforebegin', newHTML); 
+    },
+
+    clearBookingFormInputs() {
+    document.getElementById('book-destination').value = ''; 
+    document.getElementById('book-travelers').value = '';    
+    document.getElementById('book-departure').value = '';    
+    document.getElementById('book-duration').value = '';
     },
 
 }

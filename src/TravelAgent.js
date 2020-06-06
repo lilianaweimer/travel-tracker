@@ -8,7 +8,6 @@ class TravelAgent extends User {
         this.allTrips = [];
     }
 
-    //NOT SURE I ACTUALLY NEED THIS ONE OR THE PROPERTY
     addTrips(trips) {
         trips.forEach(trip => {
             this.allTrips.push(trip);
@@ -41,8 +40,6 @@ class TravelAgent extends User {
     findTodaysTravelers(trips, today) {
         let todaysTravelers = [];
         trips.forEach(trip => {
-            console.log(trip.date);
-            
             if (!todaysTravelers.includes(trip.userID) && trip.date === today) {
                 todaysTravelers.push(trip.userID);
             }

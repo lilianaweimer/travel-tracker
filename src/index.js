@@ -19,11 +19,22 @@ let traveler;
 let users;
 let destinations;
 let trips;
+let fullTripInfo;
 let loginButton = document.querySelector('.login-button');
+let getTripCostButton = document.querySelector('.cost-button');
+let bookTripButton = document.querySelector('.book-button');
 
 loginButton.addEventListener('click', () => {
     attemptLogin()
 });
+getTripCostButton.addEventListener('click', () => {
+    getBookTripInfo()
+});
+bookTripButton.addEventListener('click', () => {
+    addTripToAPI(fullTripInfo)
+    domUpdates.clearBookingFormInputs()
+});
+
 
 Promise.all([
     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/')
@@ -39,8 +50,15 @@ Promise.all([
 const createDatasets = (userData, tripsData, destinationData) => {
     users = userData.travelers;    
     trips = tripsData.trips;
-    destinations = destinationData.destinations;   
-    domUpdates.importApiData(users, trips, destinations);    
+    destinations = destinationData.destinations;
+    let date = getTodaysDate();   
+    domUpdates.importData(users, trips, destinations, date);    
+}
+
+const getTodaysDate = () => {
+    let today = new Date();
+    today = `${today.getMonth()}/${today.getDate()}/${today.getFullYear()}`
+    return today;
 }
 
 const attemptLogin = () => {
@@ -82,11 +100,94 @@ const createUser = (newID) => {
 
 const checkLogInStatus = () => {
     if (user.loggedIn === true) {
-        domUpdates.showDashboard(user);
+        showDashboard(user);
     }
+}
+
+const showDashboard = (user) => {
+    if (user.type === 'traveler') {
+        showTravelerDashboard();
+    } else if (user.type === 'agent') {
+        showAgentDashboard();
+    }
+}
+
+const showTravelerDashboard = () => {
+    domUpdates.updateDestinationsDropdown(destinations);
+    domUpdates.showTravelerWidgets();
+    domUpdates.showTravelerTrips(trips);
+    domUpdates.showTravelerExpenses(destinations);
+    domUpdates.displayWelcome('traveler');
+}
+
+const showAgentDashboard = () => {
+    domUpdates.showAgentWidgets();
+    domUpdates.showAgentIncome(destinations);
+    domUpdates.showCurrentTravelers(trips);
+    domUpdates.showPendingTrips(trips);
+    domUpdates.displayWelcome('agent');
 }
 
 const finduserByID = (id) => {
     return users.find(user => user.id === id);
 }
 
+const getBookTripInfo = () => {
+    let id = Date.now();
+    let userID = traveler.id;    
+    let destinationSelection = document.getElementById('book-destination').value; 
+    let travelersInput = document.getElementById('book-travelers').value;    
+    let dateInput = document.getElementById('book-departure').value;    
+    let durationInput = document.getElementById('book-duration').value;    
+    destinationSelection = findDestinationFromName(destinationSelection);
+    let reformattedDate = dateInput.replace(/-/gi, '/');
+    fullTripInfo = {
+        id: id,
+        userID: userID,
+        destinationID: destinationSelection.id,
+        travelers: parseInt(travelersInput),
+        date: reformattedDate,
+        duration: parseInt(durationInput),
+        status: 'pending',
+        suggestedActivities: [],
+    };
+    let estimatedCost = getCost(destinationSelection, durationInput, travelersInput);
+    domUpdates.displayEstimatedCost(estimatedCost);
+}
+
+const addTripToAPI = (tripInfo) => {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripInfo)
+    })
+    .then(response => response.json())
+    .catch(err => console.error(err))
+    fetchTrips();
+    domUpdates.showTravelerTrips(trips);
+}
+
+const fetchTrips = () => {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips/')
+    .then(response => response.json())
+    .then(data => addNewTrips(data))
+    .catch(err => console.error(err))
+}
+
+const addNewTrips = (newTrips) => {
+    trips = newTrips.trips;
+}
+
+const findDestinationFromName = (destinationName) => {
+    let fullDestination = destinations.find(destination => destination.destination === destinationName);
+    return fullDestination;
+}
+
+const getCost = (destination, duration, travelers) => {
+    let lodging = destination.estimatedLodgingCostPerDay * duration;
+    let flights = destination.estimatedFlightCostPerPerson * travelers;
+    let total = lodging + flights;
+    return total + (total * .1);
+}
