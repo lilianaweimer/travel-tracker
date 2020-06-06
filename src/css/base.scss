@@ -11,6 +11,7 @@ body {
 #header {
   @include noWrapFlex;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 #dodo-logo {
