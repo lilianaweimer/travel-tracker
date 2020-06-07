@@ -9,7 +9,8 @@ body {
 }
 
 #header {
-  @include noWrapFlex;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -35,6 +36,7 @@ h1 {
  border: 5px solid white;
  border-radius: 20px;
  width: max-content;
+ height: min-content;
  padding: 5px;
  margin: 5px;
  justify-self: right;
@@ -84,8 +86,18 @@ p, input {
 }
 
 #book-trip,
-#find-traveler {
+#find-traveler,
+#search-results {
   @include formFlex;
+  h4 {
+    font-family: $primary-font;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  button {
+    background-color: $manila-light;
+    border: 4px outset $manila;
+  }
 }
 
 .booking-form,
@@ -138,7 +150,8 @@ p, input {
 }
 
 #trips-display,
-#pending-trips {
+#pending-trips,
+.searched-trips {
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
@@ -148,4 +161,8 @@ p, input {
       padding-right: 200px;
       padding-left: 20px;
     }
+}
+
+.log-out {
+  align-self: right;
 }

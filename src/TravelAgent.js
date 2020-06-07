@@ -39,8 +39,11 @@ class TravelAgent extends User {
 
     findTodaysTravelers(trips, today) {
         let todaysTravelers = [];
+        today = new Date(today)
         trips.forEach(trip => {
-            if (!todaysTravelers.includes(trip.userID) && trip.date === today) {
+            let startDate = new Date(trip.date);    
+            let endDate = (new Date(trip.date).getDate() + trip.duration);
+            if (!todaysTravelers.includes(trip.userID) && (today <= startDate && today >= endDate)) {
                 todaysTravelers.push(trip.userID);
             }
         });

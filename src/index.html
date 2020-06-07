@@ -19,6 +19,7 @@
         <h3>Amount Earned This Year</h3>
         <p class="amount-earned">$$$</p>
       </article>
+      <button class='log-out hidden' name='log out' label='log out'>Log Out</button>
     </section>
     <section id="main">
       <article class="login-widget">
@@ -59,9 +60,9 @@
       <article class="hidden agent main-widget" id="find-traveler">
         <fieldset class="find-traveler">
           <legend>Find a Client</legend>
-          <form class="login">
-            <input type="search" name="user search" placeholder="client's name" label="user search" required="required">
-            <button name="search" label="client search button">Search</button>
+          <form class="login" id="search">
+            <input class="search-bar" type="search" name="user search" placeholder="client's name" label="user search" required="required">
+            <button type="button" name="search" label="client search button" class="search-button">Search</button>
           </form>
         </fieldset>
       </article>

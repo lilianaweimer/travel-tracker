@@ -1,17 +1,9 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import User from './User';
 import Traveler from './Traveler';
 import TravelAgent from './TravelAgent';
 import domUpdates from '../src/domUpdates';
 import fetch from 'node-fetch';
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
 
 let user = new User();
 let travelAgent;
@@ -20,9 +12,10 @@ let users;
 let destinations;
 let trips;
 let fullTripInfo;
-let loginButton = document.querySelector('.login-button');
-let getTripCostButton = document.querySelector('.cost-button');
-let bookTripButton = document.querySelector('.book-button');
+const loginButton = document.querySelector('.login-button');
+const getTripCostButton = document.querySelector('.cost-button');
+const bookTripButton = document.querySelector('.book-button');
+const main = document.getElementById('main');
 
 loginButton.addEventListener('click', () => {
     attemptLogin()
@@ -31,8 +24,13 @@ getTripCostButton.addEventListener('click', () => {
     getBookTripInfo()
 });
 bookTripButton.addEventListener('click', () => {
-    addTripToAPI(fullTripInfo)
-    domUpdates.clearBookingFormInputs()
+    addTripToAPI(fullTripInfo);
+    domUpdates.clearBookingFormInputs();
+});
+main.addEventListener('click', () => {
+   manageTripRequest(event);
+   searchForClient(event); 
+   closeSearch(event);
 });
 
 Promise.all([
@@ -189,4 +187,73 @@ const getCost = (destination, duration, travelers) => {
     let flights = destination.estimatedFlightCostPerPerson * travelers;
     let total = lodging + flights;
     return total + (total * .1);
+}
+
+const manageTripRequest = (event) => {
+    if (event.target.className === 'approve-trip') {
+        approveTrip(event);
+    } else if (event.target.className === 'delete-trip') {
+        deleteTrip(event);
+    }
+}
+
+const approveTrip = (event) => {
+    let tripID = event.target.closest('.trip').id;
+    let tripToPost = {
+       "id": parseInt(tripID),
+       "status": "approved"
+    }
+    postTripApproval(tripToPost);
+    domUpdates.approveTrip(event); 
+}
+
+const postTripApproval = (tripToPost) => {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/updateTrip', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripToPost)
+    })
+    .then(response => response.json())
+    .catch(err => console.error(err))
+}
+
+const deleteTrip = (event) => {
+    let tripID = event.target.closest('.trip').id;
+    let tripToDelete = {
+        id: parseInt(tripID)
+    }
+    domUpdates.deleteTrip(event);
+    deleteTripFromAPI(tripToDelete);
+}
+
+const deleteTripFromAPI = (tripToDelete) => {
+    fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(tripToDelete)
+    })
+    .then(response => response.json())
+    .catch(err => console.error(err))
+}
+
+const searchForClient = (event) => {
+    if (event.target.className === 'search-button') {
+        let searchInput = document.querySelector('.search-bar').value.toLowerCase();
+        let foundUser = users.find(user => {
+            return user.name.toLowerCase().includes(searchInput);
+        });
+        traveler = new Traveler(foundUser);
+        domUpdates.createTraveler(traveler);
+        domUpdates.displaySearchedUserInfo(foundUser);
+    }    
+}
+
+const closeSearch = (event) => {
+    if (event.target.className === 'close-search') {
+        domUpdates.closeSearch(event);
+    }
 }

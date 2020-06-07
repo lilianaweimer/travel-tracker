@@ -2,11 +2,6 @@
 
 /*GRID & FLEX*/
 
-@mixin noWrapFlex() {
-    display: flex;
-    flex-flow: row nowrap;
-}
-
 @mixin mainWidget() {
     border: 10px solid $manila;
     border-radius: 20px;
