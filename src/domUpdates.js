@@ -14,6 +14,11 @@ const domUpdates = {
         this.date = date;
     },
 
+    updateTrips(trips, tripInfo) {
+        this.trips = trips;
+        this.showTravelerTrips(tripInfo);
+    },
+
     createDomUser(user) {
         if (user.id === 'agency') {
             travelAgent = user;
@@ -45,7 +50,7 @@ const domUpdates = {
 
     showTravelerWidgets() {
         const travelerExpenses = document.querySelector('.traveler.header-widget');
-        const travelerTrips = document.getElementById('trips');
+        const travelerTrips = document.getElementById('trips-display');
         const travelerBookTrip = document.getElementById('book-trip');
         const logInWidget = document.querySelector('.login-widget');
         logInWidget.classList.add('hidden');
@@ -54,17 +59,16 @@ const domUpdates = {
         travelerBookTrip.classList.remove('hidden');
     },
 
-    showTravelerExpenses(trips) {
-        const expenses = traveler.calculateAnnualTravelExpenses(trips);
-        document.querySelector('.amount-spent').innerText = `$${expenses}`
-        
+    showTravelerExpenses(destinations) {        
+        const expenses = traveler.calculateAnnualTravelExpenses(destinations);
+        document.querySelector('.amount-spent').innerText = `$${expenses}`;
     },
 
-    showTravelerTrips(destinations) {
-        traveler.addTrips(destinations);
-        this.removeTrips();
-        let sortedTrips = this.sortTripsByDate(traveler.trips);
-        let tripWidget = document.getElementById('trips');
+    showTravelerTrips(trips) {        
+        traveler.addTrips(trips);        
+        this.removeTrips();        
+        let sortedTrips = this.sortTripsByDate(traveler.trips);        
+        let tripWidget = document.getElementById('trips-display');
         sortedTrips.forEach(trip => {
             let destination = this.destinations.find(destination => {
                 return trip.destinationID === destination.id;
@@ -80,7 +84,7 @@ const domUpdates = {
                     <p>Status: ${trip.status}</p>
                 </article>`;   
             this.displayTrip(tripWidget, tripInfo);
-        });
+        });        
     },
 
     showAgentWidgets() {
@@ -178,10 +182,10 @@ const domUpdates = {
     },
 
     clearBookingFormInputs() {
-    document.getElementById('book-destination').value = ''; 
-    document.getElementById('book-travelers').value = '';    
-    document.getElementById('book-departure').value = '';    
-    document.getElementById('book-duration').value = '';
+        document.getElementById('book-destination').value = ''; 
+        document.getElementById('book-travelers').value = '';    
+        document.getElementById('book-departure').value = '';    
+        document.getElementById('book-duration').value = '';
     },
 
 }

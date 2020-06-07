@@ -95,7 +95,7 @@ p, input {
 }
 
 #pending-trips,
-#trips {
+#trips-display {
   h2 {
     text-align: center;
     font-size: 30px;
@@ -137,7 +137,7 @@ p, input {
   border-radius: 20px;
 }
 
-#trips,
+#trips-display,
 #pending-trips {
   display: flex;
   flex-wrap: wrap;

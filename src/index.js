@@ -35,7 +35,6 @@ bookTripButton.addEventListener('click', () => {
     domUpdates.clearBookingFormInputs()
 });
 
-
 Promise.all([
     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/')
         .then(response => response.json()),
@@ -48,7 +47,7 @@ Promise.all([
     .catch(err => console.error(err))
 
 const createDatasets = (userData, tripsData, destinationData) => {
-    users = userData.travelers;    
+    users = userData.travelers;
     trips = tripsData.trips;
     destinations = destinationData.destinations;
     let date = getTodaysDate();   
@@ -166,18 +165,18 @@ const addTripToAPI = (tripInfo) => {
     .then(response => response.json())
     .catch(err => console.error(err))
     fetchTrips();
-    domUpdates.showTravelerTrips(trips);
+    domUpdates.updateTrips(trips, [tripInfo]);
 }
 
 const fetchTrips = () => {
     fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips/')
     .then(response => response.json())
-    .then(data => addNewTrips(data))
-    .catch(err => console.error(err))
+    .then(data => addNewTrips(data.trips))
+    .catch(err => console.error(err))    
 }
 
 const addNewTrips = (newTrips) => {
-    trips = newTrips.trips;
+    trips = newTrips.trips;   
 }
 
 const findDestinationFromName = (destinationName) => {
