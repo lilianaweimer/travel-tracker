@@ -1,3 +1,189 @@
 const domUpdates = {
 
+    traveler: null,
+    travelAgent: null,
+    users: null,
+    trips: null,
+    destinations: null,
+    today: null,
+
+    importData(users, trips, destinations, date) {
+        this.users = users;
+        this.trips = trips;
+        this.destinations = destinations;
+        this.date = date;
+    },
+
+    createDomUser(user) {
+        if (user.id === 'agency') {
+            travelAgent = user;
+        } else {
+            traveler = user;
+        }
+    },
+
+    updateDestinationsDropdown() {
+        let dropdown = document.querySelector('.dropdown');
+        let sortedDestinations = this.destinations.sort((a, b) => {
+            let destinationA = a.destination.toLowerCase();
+            let destinationB = b.destination.toLowerCase();
+            if (destinationA < destinationB) {
+                return -1
+            }
+            if (destinationA > destinationB) {
+                return 1
+            }
+            return 0;
+        });
+        sortedDestinations.forEach(destination => {
+            let destinationOption = `
+            <option value='${destination.destination}' id='${destination.id}'>${destination.destination}</option>
+            `;
+            dropdown.insertAdjacentHTML('beforeend', destinationOption);
+        });
+    },
+
+    showTravelerWidgets() {
+        const travelerExpenses = document.querySelector('.traveler.header-widget');
+        const travelerTrips = document.getElementById('trips');
+        const travelerBookTrip = document.getElementById('book-trip');
+        const logInWidget = document.querySelector('.login-widget');
+        logInWidget.classList.add('hidden');
+        travelerExpenses.classList.remove('hidden');
+        travelerTrips.classList.remove('hidden');
+        travelerBookTrip.classList.remove('hidden');
+    },
+
+    showTravelerExpenses(trips) {
+        const expenses = traveler.calculateAnnualTravelExpenses(trips);
+        document.querySelector('.amount-spent').innerText = `$${expenses}`
+        
+    },
+
+    showTravelerTrips(destinations) {
+        traveler.addTrips(destinations);
+        this.removeTrips();
+        let sortedTrips = this.sortTripsByDate(traveler.trips);
+        let tripWidget = document.getElementById('trips');
+        sortedTrips.forEach(trip => {
+            let destination = this.destinations.find(destination => {
+                return trip.destinationID === destination.id;
+            });
+            let cleanDate = `${trip.date.getMonth()}/${trip.date.getDate()}/${trip.date.getFullYear()}`
+            let tripInfo = `
+                <article class='trip'>
+                    <h4>${destination.destination}</h4>
+                    <img src='${destination.image}' alt='${destination.alt}' class="trip-image"/>
+                    <p>Departure: ${cleanDate}</p>
+                    <p>Days: ${trip.duration}</p>
+                    <p>Travelers: ${trip.travelers}</p>
+                    <p>Status: ${trip.status}</p>
+                </article>`;   
+            this.displayTrip(tripWidget, tripInfo);
+        });
+    },
+
+    showAgentWidgets() {
+        const agentIncome = document.getElementById('agent-income');
+        const currentTravelers = document.getElementById('current-travelers');
+        const agentSearch = document.getElementById('find-traveler');
+        const pendingTrips = document.getElementById('pending-trips')
+        const logInWidget = document.querySelector('.login-widget');
+        logInWidget.classList.add('hidden');
+        agentIncome.classList.remove('hidden');
+        currentTravelers.classList.remove('hidden');
+        agentSearch.classList.remove('hidden');
+        pendingTrips.classList.remove('hidden');
+    },
+
+    showPendingTrips(trips) {
+        let pending = travelAgent.findPendingTrips(trips);
+        let sortedPending = this.sortTripsByDate(pending);
+        const displayTo = document.getElementById('pending-trips');
+        sortedPending.forEach(trip => {
+            let destination = this.destinations.find(destination => {
+                return trip.destinationID === destination.id;
+            });
+            let cleanDate = `${trip.date.getMonth()}/${trip.date.getDate()}/${trip.date.getFullYear()}`
+            const tripHTML = `
+            <article class='trip'>
+                <h4>${destination.destination}</h4>
+                <img src='${destination.image}' alt='${destination.alt}' class="trip-image"/>
+                <p>${cleanDate}</p>
+                <p>Client Name: ${this.findUserName(trip.userID)}</p> 
+                <p>Duration: ${trip.duration} days</p>
+                <p>Walkers: ${trip.travelers}</p>
+                <p>Status: ${trip.status}</p>
+                <button class='approve-trip'>Approve</button>
+                <button class='delete-trip'>Delete</button>
+            </article>`;
+            this.displayTrip(displayTo, tripHTML);
+        });
+    },
+
+    removeTrips() {
+        let tripCards = document.getElementsByClassName('trip');
+        while (tripCards[0]) {
+            tripCards[0].parentNode.removeChild(tripCards[0]);
+        }
+    },
+
+    findUserName(id) {
+        let user = this.users.find(user => user.id === id);
+        return user.name;
+    },
+
+    showAgentIncome(destinations) {
+        const income = travelAgent.calculateIncome(destinations);
+        document.querySelector('.amount-earned').innerText = `$${income}`
+    },
+
+    showCurrentTravelers() {
+        const travelers = travelAgent.findTodaysTravelers(this.trips, this.today);
+        document.querySelector('.todays-travelers').innerText = `${travelers.length}`;
+    },
+
+    displayWelcome(user) {
+        let welcome = document.querySelector('.welcome');
+        if (user === 'traveler') {
+            let firstName = traveler.name.split(" ")[0]
+            welcome.innerText = `Welcome, ${firstName}!`
+        } else if (user === 'agent') {
+            welcome.innerText = 'Welcome, Wilbur!';
+        }
+    },
+
+    sortTripsByDate(tripsToSort) {
+        return tripsToSort.map(trip => {
+            trip.date = new Date(trip.date);
+            return trip;
+        }).sort((a, b) => {
+            return b.date - a.date;
+        });       
+    },
+
+    displayTrip(tripWidget, tripInfo) {
+        tripWidget.insertAdjacentHTML('beforeend', tripInfo);
+    },
+
+    displayEstimatedCost(cost) {
+        let button = document.querySelector('.cost-button');
+        let newHTML = `
+        <div>
+        <h4>Estimated Cost (10% fee included): $${cost}</h4>
+        `;
+        document.querySelector('.book-button').classList.remove('hidden');
+        button.classList.add('hidden');
+        button.insertAdjacentHTML('beforebegin', newHTML); 
+    },
+
+    clearBookingFormInputs() {
+    document.getElementById('book-destination').value = ''; 
+    document.getElementById('book-travelers').value = '';    
+    document.getElementById('book-departure').value = '';    
+    document.getElementById('book-duration').value = '';
+    },
+
 }
+
+module.exports = domUpdates;

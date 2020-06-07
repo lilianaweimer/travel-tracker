@@ -11,6 +11,7 @@ body {
 #header {
   @include noWrapFlex;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 #dodo-logo {
@@ -89,8 +90,8 @@ p, input {
 
 .booking-form,
 .find-traveler {
- @include dodoform;
- padding: 20px;
+  @include dodoform;
+  padding: 20px;
 }
 
 #pending-trips,
@@ -107,4 +108,44 @@ p, input {
 
 #dodo-logo {
   padding-right: 15px;
+}
+
+.trip {
+  height: auto;
+  width: 250px;
+  border: 5px double $manila;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 5px;
+  text-align: center;
+    h4 {
+      font-family: $primary-font;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    button {
+      background-color: $manila-light;
+      border: 4px outset $manila;
+    }
+}
+
+.trip-image {
+  width: 245px;
+  height: 150px;
+  overflow: hidden;
+  border: 2px solid $manila;
+  border-radius: 20px;
+}
+
+#trips,
+#pending-trips {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 625px;
+    .trips-header {
+      align-self: flex-start;
+      padding-right: 200px;
+      padding-left: 20px;
+    }
 }

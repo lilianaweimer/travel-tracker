@@ -7,17 +7,17 @@
     <section id="header">
       <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo" id="dodo-logo">
       <h1 class="welcome">Welcome to Dodo Airlines!</h1>
-      <article class="header-widget agent hidden">
-        <h3>Current Happy Travelers</h3>
-        <p>x</p>
+      <article class="header-widget agent hidden" id="current-travelers">
+        <h3>Walkers With Wings Today</h3>
+        <p class="todays-travelers">x</p>
       </article>
       <article class="header-widget traveler hidden">
         <h3>Amount Spent on Travel This Year</h3>
-        <p>$$$</p>
+        <p class="amount-spent">$$$</p>
       </article>
-      <article class="header-widget agent hidden">
+      <article class="header-widget agent hidden" id="agent-income">
         <h3>Amount Earned This Year</h3>
-        <p>$$$</p>
+        <p class="amount-earned">$$$</p>
       </article>
     </section>
     <section id="main">
@@ -25,34 +25,36 @@
         <fieldset class="login">
           <legend>Login</legend>
           <form class="login">
-            <input type="text" name="username" placeholder="username" label="username" required="required">
-            <input type="password" name="password" placeholder="password" label="password" required="required">
-            <button name="login" label="login button">Login</button>
+            <input type="text" id="username-input" placeholder="username" aria-label="username" required="required">
+            <input type="password" id="password-input" placeholder="password" aria-label="password" required="required">
+            <button type="button" class="login-button" name="login-button" label="login button">Login</button>
           </form>
         </fieldset>
       </article>
       <article class="traveler main-widget hidden" id="trips">
-        <h2>Your Trips</h2>
+        <h2 class="trips-header">Your Trips</h2>
       </article>
       <article class="traveler main-widget hidden" id="book-trip">
         <fieldset class="booking-form">
           <legend>Book a Trip</legend>
-          <form class="booking-form">
-            <label for="start">Start Date</label>
-            <input type="date" label="start date" name="start" required="required">
-            <label for="duration">Duration</label>
-            <input type="number" label="duration in days" name="duration" min="1" max="20" required="required">
+          <form class="booking-form form-interior">
+            <label for="start">Departure Date</label>
+            <input type="date" label="departure date" name="start" id="book-departure" required="required">
+            <label for="duration">Duration (Days)</label>
+            <input type="number" label="duration in days" name="duration" min="1" max="20" id="book-duration" required="required">
             <label for="number">Number of Travelers</label>
-            <input type="number" label="number of travelers" name="number" min="1" max="5" required="required">
+            <input type="number" label="number of travelers" name="number" min="1" max="5" id="book-travelers" required="required">
             <label for="destination">Destination</label>
-            <select label="destination" name="destination" required="required">
+            <select class="dropdown" label="destination" name="destination" id="book-destination" required="required">
             </select>
-            <button name="book trip" label="book trip button">Book Trip</button>
+            <button type="button" class="cost-button" name="get cost" label="get trip cost">Get Estimated Cost</button>
+            <button type="button" class="book-button hidden" name="book trip" label="book trip button">Book Trip</button>
+        </div>
           </form>
         </fieldset>
       </article>
       <article class="agent main-widget hidden" id="pending-trips">
-        <h2>Pending Trip Requests</h2>
+        <h2 class='trips-header'>Pending Trip Requests</h2>
       </article>
       <article class="hidden agent main-widget" id="find-traveler">
         <fieldset class="find-traveler">

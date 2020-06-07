@@ -72,8 +72,9 @@ describe('Traveler', function() {
     ];
 
     beforeEach(() => {
-    user = new User(userData);
+    user = new User();
     traveler = new Traveler(userData);
+    
     });
 
     it('should be a function', function() {

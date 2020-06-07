@@ -112,9 +112,9 @@ describe('Travel Agent', function() {
     ];
 
     beforeEach(() => {
-    user = new User(userData);
+    user = new User();
     traveler = new Traveler(userData);
-    travelAgent = new TravelAgent(agentData);
+    travelAgent = new TravelAgent();
     });
 
     it('should be a function', function() {

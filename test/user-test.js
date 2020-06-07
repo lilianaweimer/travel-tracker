@@ -9,10 +9,9 @@ describe('User', function() {
         "name": "Ofilia Titman",
         "travelerType": "thrill-seeker"
     };
-    let agentData = {};
 
     beforeEach(() => {
-    user = new User(userData);
+    user = new User(userData.id);
     });
 
     it('should be a function', function() {
@@ -22,15 +21,6 @@ describe('User', function() {
     it('should be an instance of User', function() {
       expect(user).to.be.an.instanceof(User);
     });
-
-    it('should have an id', function() {
-        expect(user.id).to.equal(45)
-    });
-
-    it('should be able to be a travel agent', function() {
-        user = new User(agentData);
-        expect(user.id).to.equal('agency');
-    })
 
     it('should have a password', function() {
         expect(user.password).to.equal('travel2020');
@@ -53,4 +43,18 @@ describe('User', function() {
         user.logIn('password');
         expect(user.loggedIn).to.equal(false);
     });
+
+    it('should have a type', function() {
+        expect(user.type).to.equal(undefined);
+    });
+
+    it('should be able to change type to traveler', function() {
+       user.changeType('traveler');
+       expect(user.type).to.equal('traveler'); 
+    });
+
+    it('should be able to change type to a travel agent', function() {
+        user.changeType('agent');
+        expect(user.type).to.equal('agent');
+    })
 });
