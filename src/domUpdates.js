@@ -206,7 +206,7 @@ const domUpdates = {
         document.getElementById('book-duration').value = '';
     },
 
-    displaySearchedUserInfo(searchedUser) {
+    displaySearchedUserInfo() {
         this.traveler.addTrips(this.trips);
         document.getElementById('search').classList.add('hidden');
         let travelerInfoSection = document.getElementById('find-traveler');
@@ -242,7 +242,6 @@ const domUpdates = {
             }
         });
     },
-
 
     insertPendingHTML(destination, trip, searchedTrips) {
         searchedTrips.insertAdjacentHTML('beforeend', `

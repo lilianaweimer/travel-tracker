@@ -186,7 +186,7 @@ describe('Travel Agent', function() {
     });
 
     it('should be able to find travelers for today\'s date', function() {
-        expect(travelAgent.findTodaysTravelers(trips, today)).to.deep.equal([54, 45])
+        expect(travelAgent.findTodaysTravelers(trips, today)).to.deep.equal([ 45, 54, 6543, 3465 ])
     });
 
 });
