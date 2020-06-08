@@ -164,5 +164,10 @@ p, input {
 }
 
 .log-out {
-  align-self: right;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border: 2px outset white;
+  color: rgba(63,94,251,1);
+  width: max-content;
 }

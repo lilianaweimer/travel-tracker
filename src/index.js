@@ -16,6 +16,7 @@ const loginButton = document.querySelector('.login-button');
 const getTripCostButton = document.querySelector('.cost-button');
 const bookTripButton = document.querySelector('.book-button');
 const main = document.getElementById('main');
+const logOutButton = document.querySelector('.log-out');
 
 loginButton.addEventListener('click', () => {
     attemptLogin()
@@ -31,6 +32,9 @@ main.addEventListener('click', () => {
    manageTripRequest(event);
    searchForClient(event); 
    closeSearch(event);
+});
+logOutButton.addEventListener('click', () => {
+    logOut() 
 });
 
 Promise.all([
@@ -256,4 +260,8 @@ const closeSearch = (event) => {
     if (event.target.className === 'close-search') {
         domUpdates.closeSearch(event);
     }
+}
+
+const logOut = () => {
+    location.reload()
 }

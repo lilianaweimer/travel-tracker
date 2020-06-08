@@ -57,10 +57,12 @@ const domUpdates = {
         const travelerTrips = document.getElementById('trips-display');
         const travelerBookTrip = document.getElementById('book-trip');
         const logInWidget = document.querySelector('.login-widget');
+        const logOutButton = document.querySelector('.log-out');
         logInWidget.classList.add('hidden');
         travelerExpenses.classList.remove('hidden');
         travelerTrips.classList.remove('hidden');
         travelerBookTrip.classList.remove('hidden');
+        logOutButton.classList.remove('hidden');
     },
 
     showTravelerExpenses(destinations) {      
@@ -97,11 +99,13 @@ const domUpdates = {
         const agentSearch = document.getElementById('find-traveler');
         const pendingTrips = document.getElementById('pending-trips')
         const logInWidget = document.querySelector('.login-widget');
+        const logOutButton = document.querySelector('.log-out');
         logInWidget.classList.add('hidden');
         agentIncome.classList.remove('hidden');
         currentTravelers.classList.remove('hidden');
         agentSearch.classList.remove('hidden');
         pendingTrips.classList.remove('hidden');
+        logOutButton.classList.remove('hidden');
     },
 
     showPendingTrips(trips) {
