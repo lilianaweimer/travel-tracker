@@ -33,6 +33,14 @@ describe('domUpdates', function() {
         expect(domUpdates.updateTrips).to.have.been.called.with(trips, tripInfo);
     });
 
+    it('should spy on resetBookingForm', function () {
+        global.domUpdates;
+        chai.spy.on(domUpdates, ['resetBookingForm'], () => {});
+        domUpdates.resetBookingForm();
+        expect(domUpdates.resetBookingForm).to.have.been.called(1);
+        expect(domUpdates.resetBookingForm).to.have.been.called.with();
+    });
+
     it('should spy on createTraveler', function () {
         let newTraveler = {};
 

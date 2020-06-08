@@ -1,6 +1,7 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import "_variables.scss";
 @import "_mixins.scss";
+@import "_mediaQueries.scss"
 
 body {
   background: $primary-background;
@@ -101,7 +102,7 @@ p, input {
 }
 
 .booking-form,
-.find-traveler {
+.client-search {
   @include dodoform;
   padding: 20px;
 }

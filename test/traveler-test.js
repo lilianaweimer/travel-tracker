@@ -128,4 +128,9 @@ describe('Traveler', function() {
         traveler.addTrips(trips);
         expect(traveler.calculateAnnualTravelExpenses(destinations)).to.equal(12265);
     });
+
+    it('should be able to calculate total spending on trips', function () {
+        traveler.addTrips(trips);
+        expect(traveler.calculateTotalTravelExpenses(destinations)).to.equal(12265);
+    })
 });

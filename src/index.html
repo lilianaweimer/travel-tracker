@@ -37,7 +37,7 @@
       <article class="traveler main-widget hidden" id="book-trip">
         <fieldset class="booking-form">
           <legend>Book a Trip</legend>
-          <form class="booking-form form-interior">
+          <form class="booking-form form-interior" id="booking">
             <label for="start">Departure Date</label>
             <input type="date" label="departure date" name="start" id="book-departure" required="required">
             <label for="duration">Duration (Days)</label>
@@ -57,7 +57,7 @@
         <h2 class='trips-header'>Pending Trip Requests</h2>
       </article>
       <article class="hidden agent main-widget" id="find-traveler">
-        <fieldset class="find-traveler">
+        <fieldset class="client-search">
           <legend>Find a Client</legend>
           <form class="login" id="search">
             <input class="search-bar" type="search" name="user search" placeholder="client's name" label="user search" required="required">
@@ -65,6 +65,7 @@
           </form>
         </fieldset>
       </article>
+      <article class="agent main-widget hidden" id="search-results"></article>
     </section>
     <button class='log-out hidden' name='log out' label='log out'>Log Out</button>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->

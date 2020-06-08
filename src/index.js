@@ -167,6 +167,7 @@ const addTripToAPI = (tripInfo) => {
     .then(response => response.json())
     .catch(err => console.error(err))
     fetchTrips();
+    domUpdates.resetBookingForm();
     domUpdates.updateTrips(trips, [tripInfo]);
 }
 

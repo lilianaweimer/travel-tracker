@@ -19,6 +19,15 @@ const domUpdates = {
         this.showTravelerTrips(tripInfo);
     },
 
+    resetBookingForm() {
+        let bookingForm = document.getElementById('booking');
+        bookingForm.reset();
+        this.updateDestinationsDropdown();
+        document.querySelector('.cost-button').classList.remove('hidden');
+        document.querySelector('.book-button').classList.add('hidden');
+        document.getElementById('cost-display').remove();
+    },
+
     createTraveler(newTraveler) {
         this.traveler = newTraveler;
     },
@@ -67,7 +76,7 @@ const domUpdates = {
 
     showTravelerExpenses(destinations) {      
         const expenses = traveler.calculateAnnualTravelExpenses(destinations);
-        document.querySelector('.amount-spent').innerText = `$${expenses}`;
+        document.querySelector('.amount-spent').innerText = `$${this.prettifyMoneyNumbers(expenses)}`;
     },
 
     showTravelerTrips(trips) {        
@@ -157,7 +166,7 @@ const domUpdates = {
 
     showAgentIncome(destinations) {
         const income = travelAgent.calculateIncome(destinations);
-        document.querySelector('.amount-earned').innerText = `$${income}`
+        document.querySelector('.amount-earned').innerText = `$${this.prettifyMoneyNumbers(income)}`
     },
 
     showCurrentTravelers() {
@@ -191,8 +200,8 @@ const domUpdates = {
     displayEstimatedCost(cost) {
         let button = document.querySelector('.cost-button');
         let newHTML = `
-        <div>
-        <h4>Estimated Cost (10% fee included): $${cost}</h4>
+        <div id="cost-display">
+        <h4>Estimated Cost (10% fee included): $${this.prettifyMoneyNumbers(cost)}</h4>
         `;
         document.querySelector('.book-button').classList.remove('hidden');
         button.classList.add('hidden');
@@ -208,12 +217,15 @@ const domUpdates = {
 
     displaySearchedUserInfo() {
         this.traveler.addTrips(this.trips);
-        document.getElementById('search').classList.add('hidden');
-        let travelerInfoSection = document.getElementById('find-traveler');
+        document.getElementById('find-traveler').classList.add('hidden');
+        document.getElementById('search-results').classList.remove('hidden');
+        let travelerExpenses = this.traveler.calculateTotalTravelExpenses(this.destinations);
+        travelerExpenses = this.prettifyMoneyNumbers(travelerExpenses);
+        let travelerInfoSection = document.getElementById('search-results');
         travelerInfoSection.innerHTML = `
         <section id='search-results' class='main-widget'>
         <h2 class='trips-header'>${this.traveler.name}</h2>
-        <p>Total spent on travel: $${this.traveler.calculateTotalTravelExpenses(this.destinations)}</p>
+        <p>Total spent on travel: $${travelerExpenses}</p>
         <h4>Trips:</h4>
         <section class='searched-trips'></section>
         <button class='close-search'>Back to Search</button>
@@ -222,9 +234,10 @@ const domUpdates = {
         this.displaySearchedTrips();
     },
 
-    closeSearch(event) {
-        // document.getElementById('search-results').remove();
-        // document.getElementById('search').classList.remove('hidden');
+    closeSearch() {
+        document.getElementById('search-results').classList.add('hidden');
+        document.getElementById('find-traveler').classList.remove('hidden');
+        document.getElementById('search').reset();
     },
 
     displaySearchedTrips() {
@@ -266,6 +279,11 @@ const domUpdates = {
             <button class='delete-trip'>Delete</button>
         </article>
         `);
+    },
+
+    prettifyMoneyNumbers(dollars) {
+        let prettyDollars = dollars.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        return prettyDollars;
     },
 
 }
