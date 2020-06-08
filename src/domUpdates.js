@@ -90,14 +90,14 @@ const domUpdates = {
             });
             trip.date = `${trip.date.getFullYear()}/${trip.date.getMonth()}/${trip.date.getDate()}`;
             let tripInfo = `
-                <article class='trip'>
+                <button class='trip' type='button'>
                     <h4>${destination.destination}</h4>
                     <img src='${destination.image}' alt='${destination.alt}' class="trip-image"/>
                     <p>Departure: ${trip.date}</p>
                     <p>Days: ${trip.duration}</p>
                     <p>Travelers: ${trip.travelers}</p>
                     <p>Status: ${trip.status}</p>
-                </article>`;   
+                </button>`;   
             this.displayTrip(tripWidget, tripInfo);
         });        
     },
@@ -261,7 +261,7 @@ const domUpdates = {
         <article class='trip' id='${trip.id}'>
             <h4>${destination.destination}</h4>
             <p>Departure: ${trip.date}</p>
-            <p>Duration: ${trip.duration}</p>
+            <p>Duration: ${trip.duration} days</p>
             <p>Walkers: ${trip.travelers}</p>
             <button class='approve-trip'>Approve</button>
             <button class='delete-trip'>Delete</button>
@@ -274,7 +274,7 @@ const domUpdates = {
         <article class='trip' id='${trip.id}'>
             <h4>${destination.destination}</h4>
             <p>Departure: ${trip.date}</p>
-            <p>Duration: ${trip.duration}</p>
+            <p>Duration: ${trip.duration} days</p>
             <p>Walkers: ${trip.travelers}</p>
             <button class='delete-trip'>Delete</button>
         </article>

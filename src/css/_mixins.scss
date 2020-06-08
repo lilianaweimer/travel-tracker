@@ -6,10 +6,19 @@
     border: 10px solid $manila;
     border-radius: 20px;
     background-color: $manila-light;
-    width: 600px;
+    width: 620px;
     height: 600px;
     margin: 20px;
 }
+
+// @mixin mainWidgetSmall() {
+//     border: 10px solid $manila;
+//     border-radius: 20px;
+//     background-color: $manila-light;
+//     width: 300px;
+//     height: 600px;
+//     margin: 20px;
+// }
 
 @mixin dodoform() {
     display: flex;
@@ -44,4 +53,10 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+}
+
+@mixin backgroundAnimation() {
+    background: linear-gradient(-45deg, #3f5efb, #3f94bf, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
