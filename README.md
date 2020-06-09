@@ -12,7 +12,7 @@ The planning document used can be viewed [here](https://docs.google.com/document
 Note: The theme I chose was Dodo Airlines from Animal Crossing: New Horizons (which is why the agent login says "Welcome, Wilbur!").
 
 ## Deployed Site Link
-
+http://lilianaweimer.github.io/travel-tracker
 
 ## Technologies Used
 - HTML
