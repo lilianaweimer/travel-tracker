@@ -14,6 +14,19 @@ Note: The theme I chose was Dodo Airlines from Animal Crossing: New Horizons (wh
 ## Deployed Site Link
 http://lilianaweimer.github.io/travel-tracker
 
+To log in as the travel agency:
+
+`username: agency`
+
+`password: travel2020`
+
+To log in as a traveler:
+
+`username: travelerX (where X is the ID of the user, can be 1-50)`
+
+`password: travel2020`
+
+
 ## Technologies Used
 - HTML
 - CSS/SCSS/Sass
