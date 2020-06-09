@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Dodo Airlines Travel Tracker</title>
+  </head>
+  <body>
+    <section id="header">
+      <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo" id="dodo-logo">
+      <h1 class="welcome">Welcome to Dodo Airlines!</h1>
+      <button class="header-widget agent hidden" id="current-travelers">
+        <h3>Walkers With Wings Today</h3>
+        <p class="todays-travelers">x</p>
+      </button>
+      <button class="header-widget traveler hidden">
+        <h3>Amount Spent on Travel This Year</h3>
+        <p class="amount-spent">$$$</p>
+      </button>
+      <button class="header-widget agent hidden" id="agent-income">
+        <h3>Amount Earned This Year</h3>
+        <p class="amount-earned">$$$</p>
+      </button>
+    </section>
+    <section id="main">
+      <article class="login-widget">
+        <fieldset class="login">
+          <legend>Login</legend>
+          <form class="login">
+            <input type="text" id="username-input" placeholder="username" aria-label="username" required="required">
+            <input type="password" id="password-input" placeholder="password" aria-label="password" required="required">
+            <button type="button" class="login-button" name="login-button" label="login button">Login</button>
+          </form>
+        </fieldset>
+      </article>
+      <article class="traveler main-widget hidden" id="trips-display">
+        <h2 class="trips-header">Your Trips</h2>
+      </article>
+      <article class="traveler main-widget hidden" id="book-trip">
+        <fieldset class="booking-form">
+          <legend>Book a Trip</legend>
+          <form class="booking-form form-interior" id="booking">
+            <label for="start">Departure Date</label>
+            <input type="date" label="departure date" name="start" id="book-departure" required="required">
+            <label for="duration">Duration (Days)</label>
+            <input type="number" label="duration in days" name="duration" min="1" max="20" id="book-duration" required="required">
+            <label for="number">Number of Travelers</label>
+            <input type="number" label="number of travelers" name="number" min="1" max="5" id="book-travelers" required="required">
+            <label for="destination">Destination</label>
+            <select class="dropdown" label="destination" name="destination" id="book-destination" required="required">
+            </select>
+            <button type="button" class="cost-button" name="get cost" label="get trip cost">Get Estimated Cost</button>
+            <button type="button" class="book-button hidden" name="book trip" label="book trip button">Book Trip</button>
+        </div>
+          </form>
+        </fieldset>
+      </article>
+      <article class="agent main-widget hidden" id="pending-trips">
+        <h2 class='trips-header'>Pending Trip Requests</h2>
+      </article>
+      <article class="hidden agent main-widget" id="find-traveler">
+        <fieldset class="client-search">
+          <legend>Find a Client</legend>
+          <form class="login" id="search">
+            <input class="search-bar" type="search" name="user search" placeholder="client's name" label="user search" required="required">
+            <button type="button" name="search" label="client search button" class="search-button">Search</button>
+          </form>
+        </fieldset>
+      </article>
+      <article class="agent main-widget hidden" id="search-results"></article>
+    </section>
+    <button class='log-out hidden' name='log out' label='log out'>Log Out</button>
+    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+  <script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
