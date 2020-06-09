@@ -1,22 +1,12 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
+/* IMPORTS*/
 @import "_variables.scss";
 @import "_mixins.scss";
 
+/*GENERAL RULES*/
 body {
-  background: $primary-background;
+  @include backgroundAnimation;
   display: flex;
   flex-flow: column nowrap;
-}
-
-#header {
-  @include noWrapFlex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-#dodo-logo {
-  width: 200px;
-  height: auto;
 }
 
 h1 {
@@ -25,31 +15,74 @@ h1 {
   font-size: 45px;
 }
 
+h2 {
+  font-family: $carter;
+}
+
+h3, legend, button {
+  font-family: $primary-font;
+}
+
+p, input {
+  font-family: $secondary-font;
+}
+
+/*HEADER RULES*/
+#header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#dodo-logo {
+  width: 200px;
+  height: auto;
+  padding-right: 15px;
+}
+
+.header-widget {
+  border: 5px solid white;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 20px;
+  width: max-content;
+  height: min-content;
+  padding: 5px;
+  margin: 5px;
+  justify-self: right;
+  font-family: $secondary-font;
+  padding: -20px 15px;
+ 
+  p {
+    color: white;
+    text-align: center;
+    font-size: 25px;
+  }
+ 
+  h3 {
+    color: white;
+  }
+ }
+
+ .log-out {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border: 2px outset white;
+  color: rgba(63,94,251,1);
+  width: max-content;
+}
+
+/*MAIN WIDGET & BODY RULES*/
+
 #main {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
 
-.header-widget {
- border: 5px solid white;
- border-radius: 20px;
- width: max-content;
- padding: 5px;
- margin: 5px;
- justify-self: right;
- font-family: $secondary-font;
- padding: -20px 15px;
-
- p {
-   color: white;
-   text-align: center;
-   font-size: 25px;
- }
-
- h3 {
-   color: white;
- }
+.main-widget {
+  @include mainWidget;
 }
 
 .login-widget {
@@ -67,52 +100,55 @@ h1 {
   flex-flow: column;
 }
 
-.main-widget {
-  @include mainWidget;
-}
-
-h2 {
-  font-family: $carter;
-}
-
-h3, legend, button {
-  font-family: $primary-font;
-}
-
-p, input {
-  font-family: $secondary-font;
-}
-
 #book-trip,
-#find-traveler {
+#find-traveler,
+#search-results {
   @include formFlex;
+  h4 {
+    font-family: $primary-font;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  button {
+    background-color: $manila-light;
+    border: 4px outset $manila;
+  }
 }
 
 .booking-form,
-.find-traveler {
+.client-search {
   @include dodoform;
   padding: 20px;
 }
 
 #pending-trips,
-#trips {
+#trips-display {
   h2 {
     text-align: center;
     font-size: 30px;
   }
 }
 
-.hidden {
-  display: none!important;
-}
+/*TRIP CARD RULES*/
 
-#dodo-logo {
-  padding-right: 15px;
+#trips-display,
+#pending-trips,
+.searched-trips {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  height: 625px;
+    .trips-header {
+      align-self: flex-start;
+      padding-right: 200px;
+      padding-left: 20px;
+    }
 }
 
 .trip {
   height: auto;
-  width: 250px;
+  width: 260px;
+  background-color: $manila-light;
   border: 5px double $manila;
   border-radius: 20px;
   margin: 10px;
@@ -130,22 +166,29 @@ p, input {
 }
 
 .trip-image {
-  width: 245px;
+  width: 240px;
   height: 150px;
   overflow: hidden;
   border: 2px solid $manila;
   border-radius: 20px;
 }
 
-#trips,
-#pending-trips {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-  height: 625px;
-    .trips-header {
-      align-self: flex-start;
-      padding-right: 200px;
-      padding-left: 20px;
-    }
+/*OTHER RULES*/
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.hidden {
+  display: none!important;
+  //had to use !important because it didn't work otherwise
+  //and I couldn't figure out why
 }

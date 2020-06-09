@@ -7,18 +7,18 @@
     <section id="header">
       <img src="https://dodoairlines.com/images/dodologo.png" alt="Dodo Airlines Logo" id="dodo-logo">
       <h1 class="welcome">Welcome to Dodo Airlines!</h1>
-      <article class="header-widget agent hidden" id="current-travelers">
+      <button class="header-widget agent hidden" id="current-travelers">
         <h3>Walkers With Wings Today</h3>
         <p class="todays-travelers">x</p>
-      </article>
-      <article class="header-widget traveler hidden">
+      </button>
+      <button class="header-widget traveler hidden">
         <h3>Amount Spent on Travel This Year</h3>
         <p class="amount-spent">$$$</p>
-      </article>
-      <article class="header-widget agent hidden" id="agent-income">
+      </button>
+      <button class="header-widget agent hidden" id="agent-income">
         <h3>Amount Earned This Year</h3>
         <p class="amount-earned">$$$</p>
-      </article>
+      </button>
     </section>
     <section id="main">
       <article class="login-widget">
@@ -31,13 +31,13 @@
           </form>
         </fieldset>
       </article>
-      <article class="traveler main-widget hidden" id="trips">
+      <article class="traveler main-widget hidden" id="trips-display">
         <h2 class="trips-header">Your Trips</h2>
       </article>
       <article class="traveler main-widget hidden" id="book-trip">
         <fieldset class="booking-form">
           <legend>Book a Trip</legend>
-          <form class="booking-form form-interior">
+          <form class="booking-form form-interior" id="booking">
             <label for="start">Departure Date</label>
             <input type="date" label="departure date" name="start" id="book-departure" required="required">
             <label for="duration">Duration (Days)</label>
@@ -57,15 +57,17 @@
         <h2 class='trips-header'>Pending Trip Requests</h2>
       </article>
       <article class="hidden agent main-widget" id="find-traveler">
-        <fieldset class="find-traveler">
+        <fieldset class="client-search">
           <legend>Find a Client</legend>
-          <form class="login">
-            <input type="search" name="user search" placeholder="client's name" label="user search" required="required">
-            <button name="search" label="client search button">Search</button>
+          <form class="login" id="search">
+            <input class="search-bar" type="search" name="user search" placeholder="client's name" label="user search" required="required">
+            <button type="button" name="search" label="client search button" class="search-button">Search</button>
           </form>
         </fieldset>
       </article>
+      <article class="agent main-widget hidden" id="search-results"></article>
     </section>
+    <button class='log-out hidden' name='log out' label='log out'>Log Out</button>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
