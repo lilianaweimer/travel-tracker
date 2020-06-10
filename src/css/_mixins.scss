@@ -11,20 +11,11 @@
     margin: 20px;
 }
 
-// @mixin mainWidgetSmall() {
-//     border: 10px solid $manila;
-//     border-radius: 20px;
-//     background-color: $manila-light;
-//     width: 300px;
-//     height: 600px;
-//     margin: 20px;
-// }
-
 @mixin dodoform() {
     display: flex;
     flex-flow: column nowrap;
     border: 10px solid $manila;
-    width: 450px;
+    width: 75%;
     height: auto;
     legend {
         font-size: 30px;
@@ -59,4 +50,40 @@
     background: linear-gradient(-45deg, #3f5efb, #3f94bf, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
     animation: gradient 15s ease infinite;
+}
+
+
+/*SMALLEST SCREENS*/
+@mixin mainWidgetSmall() {
+    border: 10px solid $manila;
+    border-radius: 20px;
+    background-color: $manila-light;
+    width: 75%;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+@mixin dodoformSmall() {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 0px solid $manila;
+    width: auto;
+    height: auto;
+    legend {
+        font-size: 30px;
+    }
+    label, h4 {
+        font-family: $primary-font;
+        font-size: 20px;
+    }
+    input, select {
+        font-size: 20px;
+        height: 30px;
+    }
+    button {
+        height: 35px;
+        font-size: 20px;
+        background-color: $manila-light;
+        border: 4px outset $manila;
+    }
 }
