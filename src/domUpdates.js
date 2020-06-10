@@ -14,9 +14,8 @@ const domUpdates = {
     this.today = date;
   },
 
-  updateTrips(trips, tripInfo) {
+  updateTrips(trips) {
     this.trips = trips;
-    this.showTravelerTrips(tripInfo);
   },
 
   resetBookingForm() {
@@ -224,13 +223,13 @@ const domUpdates = {
     travelerExpenses = this.prettifyMoneyNumbers(travelerExpenses);
     let travelerInfoSection = document.getElementById('search-results');
     travelerInfoSection.innerHTML = `
-        <section id='search-results' class='main-widget'>
+       
         <h2 class='trips-header'>${this.traveler.name}</h2>
         <p>Total spent on travel: $${travelerExpenses}</p>
         <h4>Trips:</h4>
         <section class='searched-trips'></section>
         <button class='close-search'>Back to Search</button>
-        </section>
+        
         `;
     this.displaySearchedTrips();
   },

@@ -168,7 +168,8 @@ const addTripToAPI = (tripInfo) => {
     .catch(err => console.error(err))
   fetchTrips();
   domUpdates.resetBookingForm();
-  domUpdates.updateTrips(trips, [tripInfo]);
+  domUpdates.updateTrips(trips);
+  domUpdates.showTravelerTrips([tripInfo]);
 }
 
 const fetchTrips = () => {
@@ -212,6 +213,8 @@ const approveTrip = (event) => {
   }
   postTripApproval(tripToPost);
   domUpdates.approveTrip(event); 
+  fetchTrips();
+  domUpdates.updateTrips(trips);
 }
 
 const postTripApproval = (tripToPost) => {
@@ -233,6 +236,8 @@ const deleteTrip = (event) => {
   }
   domUpdates.deleteTrip(event);
   deleteTripFromAPI(tripToDelete);
+  fetchTrips();
+  domUpdates.updateTrips(trips);
 }
 
 const deleteTripFromAPI = (tripToDelete) => {

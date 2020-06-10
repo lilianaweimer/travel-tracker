@@ -1,6 +1,7 @@
 /* IMPORTS*/
 @import "_variables.scss";
 @import "_mixins.scss";
+@import "_breakpoints.scss";
 
 /*GENERAL RULES*/
 body {
@@ -191,4 +192,78 @@ p, input {
   display: none!important;
   //had to use !important because it didn't work otherwise
   //and I couldn't figure out why
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+  .main-widget {
+    @include mainWidgetSmall;
+  }
+
+  .login-widget {
+    @include mainWidgetSmall;
+    @include formFlex;
+  
+    fieldset {
+      @include dodoformSmall;
+      align-self: center;
+    }
+  }
+
+  .trip {
+    height: auto;
+    width: 170px;
+    background-color: $manila-light;
+    border: 2px double $manila;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 0px;
+    text-align: center;
+      h4 {
+        font-family: $primary-font;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      button {
+        background-color: $manila-light;
+        border: 3px outset $manila;
+      }
+  }
+
+  .trip-image {
+    width: 140px;
+    height: 100px;
+    overflow: hidden;
+    border: 2px solid $manila;
+    border-radius: 20px;
+  }
+
+  .client-search {
+    border: none;
+  }
+
+  #search-results {
+    height: max-content;
+    overflow-y: scroll;
+  }
+
+  #book-trip {
+    height: max-content;
+  }
+
+  .booking-form,
+  .form-interior,
+  #booking {
+    width: 200px;
+    padding: 0px;
+    border: none;
+    button,
+    label,
+    input,
+    select {
+      font-size: 15px;
+    }
+  }
+ 
 }

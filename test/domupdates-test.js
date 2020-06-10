@@ -24,13 +24,12 @@ describe('domUpdates', function() {
 
   it('should spy on updateTrips', function () {
     let trips = {};
-    let tripInfo = {};
 
     global.domUpdates;
     chai.spy.on(domUpdates, ['updateTrips'], () => {});
-    domUpdates.updateTrips(trips, tripInfo);
+    domUpdates.updateTrips(trips);
     expect(domUpdates.updateTrips).to.have.been.called(1);
-    expect(domUpdates.updateTrips).to.have.been.called.with(trips, tripInfo);
+    expect(domUpdates.updateTrips).to.have.been.called.with(trips);
   });
 
   it('should spy on resetBookingForm', function () {
